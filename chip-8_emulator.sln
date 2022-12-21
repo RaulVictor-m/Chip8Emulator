@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33027.164
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "chip-8_emulator", "chip-8_emulator.vcxproj", "{E8072906-3194-4DFC-86A0-1D4492F4E8F8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E8072906-3194-4DFC-86A0-1D4492F4E8F8}.Debug|x64.ActiveCfg = Debug|x64
+		{E8072906-3194-4DFC-86A0-1D4492F4E8F8}.Debug|x64.Build.0 = Debug|x64
+		{E8072906-3194-4DFC-86A0-1D4492F4E8F8}.Debug|x86.ActiveCfg = Debug|Win32
+		{E8072906-3194-4DFC-86A0-1D4492F4E8F8}.Debug|x86.Build.0 = Debug|Win32
+		{E8072906-3194-4DFC-86A0-1D4492F4E8F8}.Release|x64.ActiveCfg = Release|x64
+		{E8072906-3194-4DFC-86A0-1D4492F4E8F8}.Release|x64.Build.0 = Release|x64
+		{E8072906-3194-4DFC-86A0-1D4492F4E8F8}.Release|x86.ActiveCfg = Release|Win32
+		{E8072906-3194-4DFC-86A0-1D4492F4E8F8}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D0ECD4E6-BEE5-4302-BFA0-7B8495DBA5B2}
+	EndGlobalSection
+EndGlobal
