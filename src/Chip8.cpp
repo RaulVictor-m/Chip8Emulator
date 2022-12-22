@@ -311,7 +311,7 @@ void Chip8::Decode(const uint16_t code)
 
 		//code == CXKK	=	MOV VX, (rand & KK)
 	case 0xC000:
-		LOG_FILE("LD V%d, (random = )", _X);
+		LOG_FILE("LD V%d, (random = ", _X);
 		OP_CXKK(code);
 		LOG_FILE("%.4X)\n", VX);
 		break;
