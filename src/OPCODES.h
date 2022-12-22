@@ -1,6 +1,6 @@
 #pragma once
 #include "Chip8.h"
-#include "ConsoleDisplay.h"
+#include "Display/Display.h"
 
 
  
@@ -214,6 +214,7 @@ inline void Chip8::OP_DXYN(const uint16_t code)          //	=	DRW Vx, Vy, nibble
 	const int x = ((code & 0x0F00) >> 8);
 	const int y = ((code & 0x00F0) >> 4);
 	reg_V[0xF] = loadSprite(N, x, y);
+	DrawTheDisplay();
 
 	//time
 	m_instruction_time = 18000;//22734;

@@ -1,9 +1,9 @@
 ﻿#pragma once
-#include <iostream>
-#include "ConsoleDisplay.h"
 
-#define OLC_PGE_APPLICATION
 #include "lib/olcPixelGameEngine.h"
+#include <iostream>
+#include "Display/Display.h"
+
 
 
 
@@ -28,7 +28,7 @@ private:
 	uint8_t				MEMORY[4096] = {};
 
 	//video 
-	ConsoleDisplay		display = ConsoleDisplay();
+	Display				display = Display();
 
 	//timing clocks
 	uint64_t			m_main_clock = 0;
@@ -38,13 +38,19 @@ private:
 public:
 	Chip8();
 	~Chip8();
-	bool OnUserCreate()override;
-	bool OnUserUpdate(float fElapsedTime)override;
+
+	//OLC::PIXELGAMEENGINE
+	bool OnUserCreate() override;										//	ROMS MENU
+	bool OnUserUpdate(float fElapsedTime) override;						//	THE MAIN LOOP
+
+
 
 	bool		InitEmulator(const char* fileName);						//	FIND AND START THE FILE AS WELL AS PREPARE IT TO RUN
-	void		Run();													//	THE MAIN LOOP
+																		
 	void		Debug();												//	PRINTS IN THE SIDE OF THE SCREEN USEFUL INFORMATION FOR DEBUGING
+
 	inline int	loadSprite(const int size, const int x, const int y);	//	SHOTCUT TO USING THE DISPLAY OBJ TO DRAW
+	void		DrawTheDisplay();										//	DRAW THE LODED DISPLAY TO THE WINDOW
 
 
 private:

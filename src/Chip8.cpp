@@ -1,7 +1,10 @@
-﻿#include "Chip8.h"
+﻿#define OLC_PGE_APPLICATION
+#include "Chip8.h"
 #include "OPCODES.h"
 #include "LOGING_MACROS.h"
-#include "ConsoleDisplay.h"
+#include "Display/Display.h"
+
+
 
 
 
@@ -47,6 +50,7 @@ Chip8::Chip8()
 
 
 	OPEN_LOG;
+	sAppName = "Chip8 Emulator";
 
 }
 Chip8::~Chip8()
@@ -54,23 +58,55 @@ Chip8::~Chip8()
 	CLOSE_LOG;
 }
 
-
-
-
-
-
 bool Chip8::OnUserCreate()
 {
+
+
 	return true;
 }
 
-bool Chip8::OnUserUpdate(float fElapsedTime)
+
+//static bool Menu = 1;
+bool Chip8::OnUserUpdate(float fElapsedTime) 
 {
-	//for (int x = 0; x < ScreenWidth(); x++)
-	//	for (int y = 0; y < ScreenHeight(); y++)
-	//		Draw(x, y, olc::Pixel(rand() % 255, rand() % 255, rand() % 255));
+	//TODO = IMPLEMENT A MENU TO SELECT THE ROM
+	//if(Menu) 
+	//{
+	//	SetScreenSize(128, 68);
+	//	Clear(olc::BLACK);
+	//	DrawString(0, 0, "Choose your ROM");
+		
+	//	return true;
+	//}
+
+
+	uint16_t code = MEMORY[reg_PC];
+	code = (code << 8);
+	code = code + MEMORY[reg_PC + 1];
+
+
+	if ((CHIP8_MICROSEC_NOW - m_main_clock) > m_instruction_time)
+	{
+		m_main_clock = CHIP8_MICROSEC_NOW;
+		Decode(code);
+		reg_PC += 2;
+	}
+	else if (GetKeyState('X') & 0x8000)return false;
+
+
+	if ((CHIP8_MICROSEC_NOW - m_timers_clock) > 16666)
+	{
+		m_timers_clock = CHIP8_MICROSEC_NOW;
+		reg_DT = reg_DT - (reg_DT > 0);
+		reg_ST = reg_ST - (reg_ST > 0);
+	}
+
 	return true;
 }
+
+
+
+
 
 
 
@@ -93,51 +129,21 @@ bool Chip8::InitEmulator(const char* fileName)
 	if (!loadFile(fileName)) return 0;
 	if (!startGraphics()) return 0;
 
-
+	m_main_clock = CHIP8_MICROSEC_NOW;
+	m_timers_clock = m_main_clock;
 
 	reg_PC = 0x200;
 	return 1;
 }
 
-void Chip8::Run()
-{
 
-	m_main_clock = CHIP8_MICROSEC_NOW;
-	m_timers_clock = m_main_clock;
-
-	int code = 0;
-	while (true)
-	{
-		code = MEMORY[reg_PC];
-		code = (code << 8);
-		code = code + MEMORY[reg_PC + 1];
-
-
-		if ((CHIP8_MICROSEC_NOW - m_main_clock) > m_instruction_time)
-		{
-			m_main_clock = CHIP8_MICROSEC_NOW;
-			Decode(code);
-			reg_PC += 2;
-		}
-		else if (GetKeyState('X') & 0x8000)break;
-
-
-		if ((CHIP8_MICROSEC_NOW - m_timers_clock) > 16666)
-		{
-			m_timers_clock = CHIP8_MICROSEC_NOW;
-			reg_DT = reg_DT - (reg_DT > 0);
-			reg_ST = reg_ST - (reg_ST > 0);
-		}
-
-	}
-
-}
 void Chip8::Debug()
 {
 	char obj_str[300];
 	ToString(obj_str);
-	display.PrintParans(obj_str, MEMORY, reg_PC);
-	display.draw();
+
+	//display.PrintParans(obj_str, MEMORY, reg_PC);
+	//display.draw();
 }
 
 bool Chip8::loadFile(const char* fileName)
@@ -153,6 +159,8 @@ bool Chip8::loadFile(const char* fileName)
 	fclose(file);
 	return true;
 }
+
+
 
 bool Chip8::startGraphics()
 {
@@ -435,6 +443,26 @@ void Chip8::Decode(const uint16_t code)
 inline int Chip8::loadSprite(const int size,const int x,const int y)
 {
 	return display.loadSprite(&MEMORY[reg_I], size,reg_V[x],reg_V[y]);
+}
+void Chip8::DrawTheDisplay()
+{
+	
+	//const size_t pixels_size = 2;
+	//const size_t offsetx = (ScreenWidth() / 2) - ((display.SCREEN_WIDTH * pixels_size) / 2);
+	//const size_t offsety = (ScreenHeight() / 2) - ((display.SCREEN_HIGHT * pixels_size) / 2);
+
+
+	Clear(olc::BLACK);
+	
+	for (int x = 0; x < display.SCREEN_WIDTH; x++)
+		for (int y = 0; y < display.SCREEN_HIGHT; y++)
+		{
+			if (display.display[(y * display.SCREEN_WIDTH) + x])
+				Draw(x, y, olc::WHITE);
+			
+
+		}
+
 }
 
 
