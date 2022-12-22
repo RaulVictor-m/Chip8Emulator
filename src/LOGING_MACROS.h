@@ -1,10 +1,12 @@
 #pragma once
 
 //MACRO TO HELP BETTER NAVIGATE THROUGHT BUGS IN THE 'Decode()' FUNCTION
+#ifdef DEBUG
+#define CHIP8_DEBUG 1
+#endif 
 
 #if CHIP8_DEBUG == 1
 
-	// OPENING THE DEBUG FILE
 	static FILE* file;
 #define OPEN_LOG file = fopen("LOG_DEBUG.txt", "w")
 
@@ -13,7 +15,8 @@
 #define CLOSE_LOG fclose(file)
 
 
-	// WRITING THE LOG FOR DECODE
+
+	// THIS MACROS ARE ONLY USED TO MAKE THE LOGGING EASIER TO UNDERSTAND AND FIX AND ALSO BE ABLE TO SWITCH IN BETWEEN USING IT OR NOT
 #define NNN (code & 0x0fff)
 #define KK	(code & 0x00ff)
 #define _X	((code & 0x0f00)>>8)
@@ -32,12 +35,6 @@
 #define OPEN_LOG
 #define LOG_FILE(x,...)
 #define CLOSE_LOG
-#define NNN
-#define KK
-#define VX
-#define VY
-#define I
-#define NEXT_OPCODE
-#define FLAG
+
 
 #endif 

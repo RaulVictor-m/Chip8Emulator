@@ -9,9 +9,7 @@
 
 
 
-#ifdef DEBUG
-#define CHIP8_DEBUG 1
-#endif 
+
 
 class Chip8 : public olc::PixelGameEngine
 {
