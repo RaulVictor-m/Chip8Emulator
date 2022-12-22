@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "lib/olcPixelGameEngine.h"
+#include "Dependencies/olcPixelGameEngine.h"
 #include <iostream>
 #include "Display/Display.h"
 
@@ -10,7 +10,7 @@
 
 
 #ifdef DEBUG
-#define CHIP8_DEBUG 0
+#define CHIP8_DEBUG 1
 #endif 
 
 class Chip8 : public olc::PixelGameEngine
@@ -36,29 +36,28 @@ private:
 	uint64_t			m_instruction_time = 0;
 
 public:
-	Chip8();
+	Chip8();															//	LOADS THE CHIP8 NUMERIC CARACTERS REPRESENTATION IN THE MEMORY 
 	~Chip8();
 
 	//OLC::PIXELGAMEENGINE
-	bool OnUserCreate() override;										//	ROMS MENU
+	bool OnUserCreate() override;										
 	bool OnUserUpdate(float fElapsedTime) override;						//	THE MAIN LOOP
 
 
 
 	bool		InitEmulator(const char* fileName);						//	FIND AND START THE FILE AS WELL AS PREPARE IT TO RUN
 																		
-	void		Debug();												//	PRINTS IN THE SIDE OF THE SCREEN USEFUL INFORMATION FOR DEBUGING
 
-	inline int	loadSprite(const int size, const int x, const int y);	//	SHOTCUT TO USING THE DISPLAY OBJ TO DRAW
+	inline int	loadSprite(const int size, const int x, const int y);	//	LOADS THE SPRITES THAT ARE IN MEMORY TO THE BUFFER OF MY DISPLAY
 	void		DrawTheDisplay();										//	DRAW THE LODED DISPLAY TO THE WINDOW
 
 
 private:
 	bool		loadFile(const char* fileName);		
-	bool		startGraphics();										//	CREATED TO BE EASYER TO INTEGRATE A REAL GRAPHICS API INSTEAD OF THE TERMINAL
+
 
 	// PART OF THE WORK FLOW
-	void		Decode(const uint16_t code);
+	void		Decode(const uint16_t code);							//	THE OPCODES EMULATION
 
 
 
@@ -66,7 +65,7 @@ private:
 	bool		keyIsPressed(const int key_code);
 	uint8_t		waitForKeyPress();
 
-	void		ToString(char* output);
+	void		ToString(char* output);									
 
 
 

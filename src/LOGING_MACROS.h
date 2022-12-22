@@ -16,13 +16,14 @@
 	// WRITING THE LOG FOR DECODE
 #define NNN (code & 0x0fff)
 #define KK	(code & 0x00ff)
-#define VX	(reg_V[(code & 0x0f00)])
-#define X	(code & 0x0f00)
-#define VY	(reg_V[(code & 0x00f0)])
-#define Y	(code & 0x00f0)
+#define _X	((code & 0x0f00)>>8)
+#define _Y	((code & 0x00f0)>>4)
+#define VX	(reg_V[_X])
+#define VY	(reg_V[_Y])
+#define V0	reg_V[0]
 #define I	reg_I
 
-#define NEXT_OPCODE ((MEMORY[reg_PC + 2] >> 8) + MEMORY[reg_PC + 3])
+#define NEXT_OPCODE ((MEMORY[reg_PC + 2] << 8) + MEMORY[reg_PC + 3])
 
 #define FLAG (reg_V[0xf])
 

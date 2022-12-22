@@ -8,7 +8,7 @@ void Display::cls()
 
 	for (int i = 0; i < SCREEN_WIDTH * SCREEN_HIGHT; i++)
 		display[i] = CLSPIXEL;
-	//draw();
+
 }
 
 
