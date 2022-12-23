@@ -82,7 +82,7 @@ bool Chip8::OnUserUpdate(float fElapsedTime)
 		Decode(code);
 		reg_PC += 2;
 	}
-	else if (GetKeyState('X') & 0x8000)return false;
+
 
 
 	if ((CHIP8_MICROSEC_NOW - m_timers_clock) > 16666)
@@ -455,11 +455,11 @@ bool Chip8::keyIsPressed(const int key_code)
 {
 	//int keys[16] = {};
 
-	int key = (key_code > 9) ? key_code + ('A' - 0xA) : key_code + ('0'+0x0);
+	int key = (key_code > 9) ? key_code - ((olc::A * 0xA) - 1) : key_code + olc::K0;
+	
 
-	if (GetKeyState(key) & 0x8000)
-		return true;
-	return false;
+
+	return GetKey((olc::Key)key).bHeld;
 }
 
 uint8_t Chip8::waitForKeyPress()
