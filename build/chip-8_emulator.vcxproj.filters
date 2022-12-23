@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Cpp\chip-8_emulator\src\Chip8.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Cpp\chip-8_emulator\src\Display\Display.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Cpp\chip-8_emulator\src\Main.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Cpp\chip-8_emulator\src\Chip8.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Cpp\chip-8_emulator\src\Dependencies\olcPixelGameEngine.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Cpp\chip-8_emulator\src\Display\Display.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Cpp\chip-8_emulator\src\LOGING_MACROS.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Cpp\chip-8_emulator\src\OPCODES.h">
+      <Filter>Arquivos de Origem</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Cpp\chip-8_emulator\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Arquivos de Cabeçalho">
+      <UniqueIdentifier>{FFAF2891-958D-3DCC-9456-926E19C7608D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Arquivos de Origem">
+      <UniqueIdentifier>{E15E6A36-8A85-343C-AC38-5202A6973408}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
