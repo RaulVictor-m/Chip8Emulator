@@ -8,10 +8,11 @@
 
 
 
+
 #include <chrono>
 #include <iostream>
 
-#define CHIP8_MICROSEC_NOW ((uint64_t)(std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now().time_since_epoch()).count()))
+
 
 
 
@@ -61,9 +62,10 @@ Chip8::~Chip8()
 bool Chip8::OnUserCreate()
 {
 	
-
 	return true;
 }
+
+
 
 
 
@@ -89,9 +91,12 @@ bool Chip8::OnUserUpdate(float fElapsedTime)
 	{
 		m_timers_clock = CHIP8_MICROSEC_NOW;
 		reg_DT = reg_DT - (reg_DT > 0);
-		reg_ST = reg_ST - (reg_ST > 0);
-	}
+		soundhandler();
 
+
+		
+	}
+	
 	return true;
 }
 
@@ -422,9 +427,30 @@ void Chip8::Decode(const uint16_t code)
 
 
 
+static int soundtime = 0;
+DWORD WINAPI ASSYNC_BEEP(void* args) { Beep(200, soundtime); return NULL; }
 
+void Chip8::soundhandler()
+{
+	static bool createdThread = 0;
+	if (reg_ST)
+	{
+		if (!createdThread)
+		{
+			soundtime = reg_ST * 17;
+			CreateThread(NULL, NULL, ASSYNC_BEEP, NULL, NULL, NULL);
+			createdThread = 1;
+		}
+		reg_ST--;
+	}
+	else {
+		if (createdThread)
+		{
+			createdThread = 0;
 
-
+		}
+	}
+}
 
 inline int Chip8::loadSprite(const int size,const int x,const int y)
 {
@@ -437,9 +463,9 @@ void Chip8::DrawTheDisplay()
 	Clear(olc::WHITE);
 	
 	for (int x = 0; x < display.SCREEN_WIDTH; x++)
-		for (int y = 0; y < display.SCREEN_HIGHT; y++)
+		for (int y = 0; y < display.SCREEN_HEIGHT; y++)
 		{
-			if (display.display[(y * display.SCREEN_WIDTH) + x])
+			if (display[(y * display.SCREEN_WIDTH) + x])
 				Draw(x, y, olc::BLACK);
 			
 

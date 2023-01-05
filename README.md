@@ -1,3 +1,1 @@
-A Simple implementation of the Chip8 emulator
-
-Still a work in Progress, There are some things needing implementation, such as sound, the debugLog system and a few bug fixes.
+An implamentation of the Chip8 emulator original version, using the OLCPIXELGAMEENGINE library

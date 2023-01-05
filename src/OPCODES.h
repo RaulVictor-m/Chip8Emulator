@@ -201,7 +201,7 @@ inline void Chip8::OP_BNNN(const uint16_t code)          //	=	JP, V0+nnn
 }
 inline void Chip8::OP_CXKK(const uint16_t code)          //	=	MOV VX, (rand & KK)
 {
-	const int random = (rand() % (0xFF+1)) & (code & 0x00FF);
+	const int random = (CHIP8_MICROSEC_NOW % (0xFF+1)) & (code & 0x00FF);
 	const int x = ((code & 0x0F00) >> 8);
 	reg_V[x] = (uint8_t)random;
 

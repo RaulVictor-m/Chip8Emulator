@@ -3,7 +3,7 @@
 #include "Dependencies/olcPixelGameEngine.h"
 #include <iostream>
 #include "Display/Display.h"
-
+#define CHIP8_MICROSEC_NOW ((uint64_t)(std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now().time_since_epoch()).count()))
 
 
 
@@ -45,6 +45,8 @@ public:
 
 	bool		InitEmulator(const char* fileName);						//	FIND AND START THE FILE AS WELL AS PREPARE IT TO RUN
 																		
+
+	void		soundhandler();
 
 	inline int	loadSprite(const int size, const int x, const int y);	//	LOADS THE SPRITES THAT ARE IN MEMORY TO THE BUFFER OF MY DISPLAY
 	void		DrawTheDisplay();										//	DRAW THE LODED DISPLAY TO THE WINDOW
