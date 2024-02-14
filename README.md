@@ -2,7 +2,7 @@
 
 This is a chip8 emulator, which was made to learning about how emulators work in general. The implementation is still missing a few ajustments on timings and also has no sound, But overall it is working with correctly for most games.
 
-It was built on top of the [OLCPIXELGAMEENGINE library].(https://github.com/OneLoneCoder/olcPixelGameEngine)
+It was built on top of the [OLCPIXELGAMEENGINE library](https://github.com/OneLoneCoder/olcPixelGameEngine).
 
 ## Building
 
