@@ -335,7 +335,7 @@ void Chip8::DrawTheDisplay()
 
 bool Chip8::keyIsPressed(const int key_code)
 {
-    //int keys[16] = {};
+    // int keys[16] = {olc::A};
 
     int key = (key_code > 9) ? key_code - ((olc::A * 0xA) - 1) : key_code + olc::K0;
 
